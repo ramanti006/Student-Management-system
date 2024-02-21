@@ -88,4 +88,19 @@ public class StudentServiceImpl extends StudentService {
 			return true;
 		}
 	}
+	
+	public List<Student> showByDepartment(String n)
+	{
+		List<Student> s = (List<Student>) repo.findAllByDepartment(n);
+		
+		return s;
+	}
+	
+	public List<Student> showByRoll(int a , int b)
+	{
+      List<Student> s = (List<Student>) repo.findByRollnoBetween(a ,b);
+		
+		return s;
+		
+	}
 }

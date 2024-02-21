@@ -28,6 +28,11 @@ public abstract class StudentService {
 	
 	public abstract boolean deleteById(int id);
 	
+	public abstract List<Student> showByDepartment(String n);
+	
+	public abstract List<Student> showByRoll(int a , int b);
+	
+	
 
 
 }
