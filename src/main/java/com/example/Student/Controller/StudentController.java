@@ -153,6 +153,42 @@ public class StudentController {
 		
 	}
 	
+	@GetMapping("/showByDepartment")
+	public ResponseEntity<Object> showByDepart(@RequestParam String department)
+	{
+		List<Student> str = stuser.showByDepartment(department);
+		
+		System.out.println(str);
+		
+		if(str == null)
+		{
+			return ResponseHandler.generateResponse("Not Found!",HttpStatus.NOT_FOUND,null);
+		}
+		else
+		{
+			return ResponseHandler.generateResponse("SUCCESSFUL!",HttpStatus.OK,str);	
+		}
+	}
+	
+	@GetMapping("/showByRollno")
+	public ResponseEntity<Object> showByRollNo(@RequestParam int a,@RequestParam int b)
+	{
+		List<Student> str = stuser.showByRoll(a,b);
+		
+		System.out.println(str);
+		
+		if(str == null)
+		{
+			return ResponseHandler.generateResponse("Not Found!",HttpStatus.NOT_FOUND,null);
+		}
+		else
+		{
+			return ResponseHandler.generateResponse("SUCCESSFUL!",HttpStatus.OK,str);	
+		}
+	}
+	
+	
+	
 	
 	
 	//it will delete all the info at one time
