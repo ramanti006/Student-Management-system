@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -226,5 +227,21 @@ public class StudentController {
 		}
 		
 	}
+	
+	///Pagination an sorting
+		@GetMapping("/pagonation/{pageno}/{pagesize}")
+		public ResponseEntity<Object> getprouctByPagination(@PathVariable int pageno,@PathVariable int pagesize)
+		{
+			Page<Student> pageUser = stuser.pagination(pageno, pagesize);
+			
+			return ResponseHandler.generateResponse("SUCCESSFUL",HttpStatus.OK,pageUser);
+		}
+		
+		@GetMapping("/sorting/{id}")
+		public ResponseEntity<Object> getprouctBySorting(@PathVariable String id)
+		{
+			List<Student> li = stuser.sorting(id);
+			return ResponseHandler.generateResponse("SUCCESSFUL",HttpStatus.OK,li);
+		}
 
 }
