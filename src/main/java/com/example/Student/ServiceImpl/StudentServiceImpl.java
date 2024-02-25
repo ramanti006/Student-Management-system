@@ -121,4 +121,14 @@ public class StudentServiceImpl extends StudentService {
 	{
 		return repo.findAll(Sort.by(Sort.Direction.ASC,id));
 	}
+	
+	
+	public Page<Student> pagingAndsorting(int pageNo ,int pageSize,String id)
+	{
+		PageRequest sortedByPriceDesc = 
+				  PageRequest.of(pageNo, pageSize,(Sort.by(Sort.Direction.ASC,id)));
+        Page<Student> pagingUser = repo.findAll(sortedByPriceDesc);
+		
+		return pagingUser;
+	}
 }
