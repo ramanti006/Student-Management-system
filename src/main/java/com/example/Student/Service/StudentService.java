@@ -2,6 +2,8 @@ package com.example.Student.Service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 import com.example.Student.Model.Student;
 
 public abstract class StudentService {
@@ -31,6 +33,11 @@ public abstract class StudentService {
 	public abstract List<Student> showByDepartment(String n);
 	
 	public abstract List<Student> showByRoll(int a , int b);
+	
+	
+    public abstract Page<Student> pagination(int pageNo ,int pageSize);
+	
+	public abstract List<Student> sorting(String id);
 	
 	
 

@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.Student.Model.Student;
@@ -102,5 +105,20 @@ public class StudentServiceImpl extends StudentService {
 		
 		return s;
 		
+	}
+	
+
+	//pagination an sorting
+	public Page<Student> pagination(int pageNo ,int pageSize)
+	{
+		PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
+		Page<Student> pagingUser = repo.findAll(pageRequest);
+		
+		return pagingUser;
+	}
+	
+	public List<Student> sorting(String id)
+	{
+		return repo.findAll(Sort.by(Sort.Direction.ASC,id));
 	}
 }
