@@ -39,6 +39,8 @@ public abstract class StudentService {
 	
 	public abstract List<Student> sorting(String id);
 	
+	public abstract Page<Student> pagingAndsorting(int pageNo ,int pageSize,String id);
+	
 	
 
 

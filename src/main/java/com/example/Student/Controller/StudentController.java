@@ -230,7 +230,7 @@ public class StudentController {
 	}
 	
 	///Pagination an sorting
-		@GetMapping("/pagonation/{pageno}/{pagesize}")
+		@GetMapping("/pagination/{pageno}/{pagesize}")
 		public ResponseEntity<Object> getprouctByPagination(@PathVariable int pageno,@PathVariable int pagesize)
 		{
 			Page<Student> pageUser = stuser.pagination(pageno, pagesize);
@@ -244,5 +244,15 @@ public class StudentController {
 			List<Student> li = stuser.sorting(id);
 			return ResponseHandler.generateResponse("SUCCESSFUL",HttpStatus.OK,li);
 		}
+		
+		
+   //paging and sorting both
+		@GetMapping("/paginationAndSorting/{pageno}/{pagesize}/{id}")
+		public ResponseEntity<Object> getprouctByPaginationAndSorting(@PathVariable int pageno,@PathVariable int pagesize,@PathVariable String id)
+		{
+			Page<Student> pageUser = stuser.pagingAndsorting(pageno, pagesize,id);
+			
+			return ResponseHandler.generateResponse("SUCCESSFUL",HttpStatus.OK,pageUser);
+		}	
 
 }
