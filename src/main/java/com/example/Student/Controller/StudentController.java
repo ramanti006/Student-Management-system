@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -141,7 +142,7 @@ public class StudentController {
 	
 	//@PutMapping("/updateStudent/{id}")
 	@PatchMapping("/updateStudent/{id}")
-	public ResponseEntity<Object> addOneStudent(@PathVariable int id ,@RequestBody Student stu)
+	public ResponseEntity<Object> updateOneStudent(@PathVariable int id ,@RequestBody Student stu)
 	{
 		Student str = stuser.update(id,stu);
 		if(str == null)
@@ -153,6 +154,21 @@ public class StudentController {
 			return ResponseHandler.generateResponse("SUCCESSFUL!",HttpStatus.OK,str);	
 		}
 		
+	}
+	
+	@PutMapping("/updateEmailAndRoll/{id}")
+	public ResponseEntity<Object> updateEmailAnddRoll(@RequestBody Student stu,@PathVariable int id)
+	{
+		stuser.updateEmailAndRoll(stu,id);
+//		if(str == null)
+//		{
+//			return ResponseHandler.generateResponse("Not Found!",HttpStatus.NOT_FOUND,null);
+//		}
+//		else
+//		{
+//			return ResponseHandler.generateResponse("SUCCESSFUL!",HttpStatus.OK,str);	
+//		}
+		return new ResponseEntity("SUCCESSFUL!",HttpStatus.OK);
 	}
 	
 	@GetMapping("/showByDepartment")
@@ -254,5 +270,20 @@ public class StudentController {
 			
 			return ResponseHandler.generateResponse("SUCCESSFUL",HttpStatus.OK,pageUser);
 		}	
-
+       
+		//this will find student based on Department
+		@GetMapping("/get/StudentDepartment/{d}")
+		public ResponseEntity<Object> getStudentByDepartment(@PathVariable String d)
+				
+		{
+			List<Student> li1 = stuser.getBydepart(d);
+			if(li1.isEmpty())
+			{
+				return ResponseHandler.generateResponse("NOT FOUND!",HttpStatus.NOT_FOUND,null);
+			}
+			else
+			{
+			return ResponseHandler.generateResponse("SUCCESSFUL",HttpStatus.OK,li1);   
+			}
+		}
 }

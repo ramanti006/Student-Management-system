@@ -1,7 +1,6 @@
 package com.example.Student.ServiceImpl;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,6 +11,8 @@ import org.springframework.stereotype.Service;
 import com.example.Student.Model.Student;
 import com.example.Student.Repositery.StudentRepositery;
 import com.example.Student.Service.StudentService;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class StudentServiceImpl extends StudentService {
@@ -130,5 +131,30 @@ public class StudentServiceImpl extends StudentService {
         Page<Student> pagingUser = repo.findAll(sortedByPriceDesc);
 		
 		return pagingUser;
+	}
+	
+	public List<Student> getBydepart(String depart)
+	{
+		List<Student> st = repo.getAllByDepartment(depart);
+		
+		return st;
+	}
+	
+	@Transactional
+	public void updateEmailAndRoll(Student stu,int id)
+	{
+		Student str = repo.findById(id).orElse(null);
+//		if(str == null)
+//		{
+//			return null;
+//	
+//		}
+//		else
+//		{
+//			repo.updateStudentMail(stu.getEmail(),stu.getRollno(),id);
+//			
+//		}
+		repo.updateStudentMail(stu.getEmail(),stu.getRollno(),id);
+		
 	}
 }
