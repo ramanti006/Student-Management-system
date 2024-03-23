@@ -41,6 +41,10 @@ public abstract class StudentService {
 	
 	public abstract Page<Student> pagingAndsorting(int pageNo ,int pageSize,String id);
 	
+	public  abstract List<Student> getBydepart(String depart);
+	
+	public abstract void updateEmailAndRoll(Student stu,int id);
+	
 	
 
 
