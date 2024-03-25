@@ -141,20 +141,22 @@ public class StudentServiceImpl extends StudentService {
 	}
 	
 	@Transactional
-	public void updateEmailAndRoll(Student stu,int id)
+	public int updateEmailAndRoll(Student stu,int id)
 	{
 		Student str = repo.findById(id).orElse(null);
-//		if(str == null)
-//		{
-//			return null;
-//	
-//		}
-//		else
-//		{
-//			repo.updateStudentMail(stu.getEmail(),stu.getRollno(),id);
-//			
-//		}
-		repo.updateStudentMail(stu.getEmail(),stu.getRollno(),id);
+		if(str == null)
+	{
+			return 0;
+	
+	}
+		else
+		{
+			repo.updateStudentMail(stu.getEmail(),stu.getRollno(),id);
+			return 1;
+			
+	 }
+		
+		//repo.updateStudentMail(stu.getEmail(),stu.getRollno(),id);
 		
 	}
 }

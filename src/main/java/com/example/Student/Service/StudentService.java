@@ -43,7 +43,7 @@ public abstract class StudentService {
 	
 	public  abstract List<Student> getBydepart(String depart);
 	
-	public abstract void updateEmailAndRoll(Student stu,int id);
+	public abstract int updateEmailAndRoll(Student stu,int id);
 	
 	
 

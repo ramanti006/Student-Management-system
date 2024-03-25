@@ -159,16 +159,16 @@ public class StudentController {
 	@PutMapping("/updateEmailAndRoll/{id}")
 	public ResponseEntity<Object> updateEmailAnddRoll(@RequestBody Student stu,@PathVariable int id)
 	{
-		stuser.updateEmailAndRoll(stu,id);
-//		if(str == null)
-//		{
-//			return ResponseHandler.generateResponse("Not Found!",HttpStatus.NOT_FOUND,null);
-//		}
-//		else
-//		{
-//			return ResponseHandler.generateResponse("SUCCESSFUL!",HttpStatus.OK,str);	
-//		}
-		return new ResponseEntity("SUCCESSFUL!",HttpStatus.OK);
+		int i = stuser.updateEmailAndRoll(stu,id);
+		if(i == 0)
+	{
+			return ResponseHandler.generateResponse("Id Not Found!",HttpStatus.NOT_FOUND,null);
+		}
+	else
+		{
+		return new ResponseEntity("SUCCESSFUL!",HttpStatus.OK);	
+	}
+		//return new ResponseEntity("SUCCESSFUL!",HttpStatus.OK);
 	}
 	
 	@GetMapping("/showByDepartment")
@@ -262,7 +262,7 @@ public class StudentController {
 		}
 		
 		
-   //paging and sorting both
+        //paging and sorting both
 		@GetMapping("/paginationAndSorting/{pageno}/{pagesize}/{id}")
 		public ResponseEntity<Object> getprouctByPaginationAndSorting(@PathVariable int pageno,@PathVariable int pagesize,@PathVariable String id)
 		{
