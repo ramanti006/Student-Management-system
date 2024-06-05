@@ -85,5 +85,27 @@ public class StudentControllerTest {
                 .andExpect(status().isNotFound()) // Expect HTTP 404 status
                 .andExpect(jsonPath("$.message").value("Not Found!")); // Expect the not found message
     }
+    
+    @Test
+    public void createStudentRecord() throws Exception
+    {
+    	Student stu = new Student();
+    	stu.setId(2);
+        stu.setName("John Doe");
+        stu.setCollgname("TIU");
+        stu.setRollno(101);
+        stu.setEmail("john.doe@gmail.com");
+        stu.setPhoneno("1234567890");
+        stu.setDepartment("CSE");
+        
+        Mockito.when(stuService.addOne(Mockito.any(Student.class))).thenReturn(stu);
+    	
+        String content =  objwriter.writeValueAsString(stu);
+        
+        mockMvc.perform(MockMvcRequestBuilders.post("/addOneStudent")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(content))
+                .andExpect(status().isCreated());
+    }
 
 }
