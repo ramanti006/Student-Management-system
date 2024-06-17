@@ -43,7 +43,7 @@ public class StudentController {
        if(stu.getCollgname() == null || stu.getDepartment() == null || stu.getEmail() == null || 
     		   stu.getPhoneno() == null || stu.getName() == null || stu.getRollno() == 0)
        {
-    	   return ResponseHandler.generateResponse("Resource Not Created!!", HttpStatus.BAD_REQUEST, null);
+    	   return ResponseHandler.generateResponse("Invalid input", HttpStatus.BAD_REQUEST, null);
        }
        else
        {
@@ -65,13 +65,15 @@ public class StudentController {
 	@PostMapping("/addMultipleStudent")
 	public ResponseEntity<Object> addMultipleStudent(@RequestBody List<Student> stu)
 	{
+		
+		System.out.println(stu);
      
 		for( Student i : stu)
 		{
 			if(i.getCollgname() == null || i.getDepartment() == null || i.getEmail() == null || 
 		    		   i.getPhoneno() == null || i.getName() == null || i.getRollno() == 0)
 		       {
-		    	   return ResponseHandler.generateResponse("Resource Not Created!!", HttpStatus.BAD_REQUEST, null);
+		    	   return ResponseHandler.generateResponse("Invalid input", HttpStatus.BAD_REQUEST, null);
 		       }
 			
 		}
@@ -238,7 +240,8 @@ public class StudentController {
 		boolean tr = stuser.deleteById(id);
 		if(tr == false)
 		{
-			return ResponseHandler.generateResponse("Not Found!",HttpStatus.NOT_FOUND,null);
+			
+			return new ResponseEntity("Not Found!",HttpStatus.NOT_FOUND);	
 		}
 		else
 		{
