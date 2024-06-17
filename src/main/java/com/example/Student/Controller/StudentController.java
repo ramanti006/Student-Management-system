@@ -1,8 +1,10 @@
 package com.example.Student.Controller;
 
 
+import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -235,17 +237,20 @@ public class StudentController {
 	
 	//it will delete one info
 	@DeleteMapping("/deleteById/{id}")
-	public ResponseEntity<Object> deleteById(@PathVariable int id)
+	public ResponseEntity<Map<String, String>> deleteById(@PathVariable int id)
 	{
 		boolean tr = stuser.deleteById(id);
+		Map<String, String> response = new HashMap<>();
 		if(tr == false)
 		{
 			
-			return new ResponseEntity("Not Found!",HttpStatus.NOT_FOUND);	
+			response.put("message", "Not Found!");
+		     return new ResponseEntity<>( response, HttpStatus.NOT_FOUND);
 		}
 		else
 		{
-			return new ResponseEntity("SUCCESSFUL!",HttpStatus.OK);	
+			response.put("message", "SUCCESSFUL!");
+	        return new ResponseEntity<>(response, HttpStatus.OK);	
 		}
 		
 	}

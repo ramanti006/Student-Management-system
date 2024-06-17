@@ -181,6 +181,34 @@ public class StudentControllerTest {
                 .andExpect(status().isNotFound()) // Expect HTTP 404 status
                 .andExpect(jsonPath("$.message").value("Not Found!")); // Expect the not found message
     }
-    
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	@Test
+	public void deleteRecordById() throws Exception
+	{
+		
+		Mockito.when(stuService.deleteById(stu2.getId())).thenReturn(true);
+		
+		mockMvc.perform(MockMvcRequestBuilders.delete("/deleteById/{id}",stu2.getId())
+				.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()) 
+				.andExpect(jsonPath("$.message").value("SUCCESSFUL!"));
+
+		
+	}
+	
+	@Test
+	public void testdeleteRecordById() throws Exception
+	{
+		
+		Mockito.when(stuService.deleteById(10)).thenReturn(false);
+		
+		mockMvc.perform(MockMvcRequestBuilders.delete("/deleteById/{id}",10)
+				.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNotFound()) 
+				.andExpect(jsonPath("$.message").value("Not Found!"));
+
+		
+	}
 
 }
